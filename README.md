@@ -5,12 +5,15 @@ Bomberman clone made using Java8 and Lwjgl library (lwjgl.org)
 
 This is the complete Intellij Idea project.
 
-To run on other OS than Windows go to Run > Edit Configurations and change the location of the native libraries in the VM options.
+<b>To run go to Run > Edit Configurations and set the location of the native libraries in the VM options.</b><br/>
+<b>Windows:</b> -Djava.library.path=lib\lwjgl\lwjgl-2.9.1\native\windows<br/>
+<b>OSX:</b>     -Djava.library.path=lib\lwjgl\lwjgl-2.9.1\native\macosx<br/>
+<b>Linux:</b>   -Djava.library.path=lib\lwjgl\lwjgl-2.9.1\native\linux<br/>
 
-Control Player 1<br/>
+<b>Control Player 1</b><br/>
 W A S D - movement<br/>
 SPACE - place bomb
 
-Control Player 2<br/>
+<b>Control Player 2</b><br/>
 Arrow Keys - movement<br/>
 NUMPAD 0 - place bomb
