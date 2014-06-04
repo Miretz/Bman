@@ -64,7 +64,6 @@ class Bomb extends GameObject implements Configuration {
 			died = true;
 		}
         if(died){
-            BombermanGame.level.clear();
             pl.die();
             for(Bomb b : BombermanGame.bombs){
                 b.isDetonated = true;

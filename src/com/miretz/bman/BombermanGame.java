@@ -57,10 +57,12 @@ public class BombermanGame implements Configuration {
 		}
 
         //regenerate level
+        /*
         boolean allBoxGone = level.stream().noneMatch(Box::isBreakable);
         if(allBoxGone){
             generateLevel();
         }
+        */
 
 		// init opengl
 		glMatrixMode(GL_PROJECTION);
@@ -80,8 +82,6 @@ public class BombermanGame implements Configuration {
 			textures.put(textureName, loadTexture(textureName));
 		}
 
-        Display.setTitle("Bman --- PLAYER1 LIVES: " + player1.getLives() + " --- PLAYER2 LIVES: " + player2.getLives());
-				
 		generateLevel();
 
 		while (!Display.isCloseRequested()) {
@@ -123,7 +123,8 @@ public class BombermanGame implements Configuration {
 				
 			
 			}
-			
+
+            Display.setTitle("Bman --- PLAYER1 LIVES: " + player1.getLives() + " --- PLAYER2 LIVES: " + player2.getLives());
 			Display.update();
 			Display.sync(60);
 		}
