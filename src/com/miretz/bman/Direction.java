@@ -1,0 +1,5 @@
+package com.miretz.bman;
+
+public enum Direction {
+	LEFT, RIGHT, UP, DOWN
+}
