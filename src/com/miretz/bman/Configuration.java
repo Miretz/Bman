@@ -12,6 +12,7 @@ interface Configuration {
     public static final int SPEED = 4;
     public static final int MOVEMENT_SMOOTHING = 20;
     public static final String FONT_TYPE = "Arial";
+    public static final int MAX_BOMBS = 1;
 
     public static final List<String> textureNames = Arrays.asList("wood", "stone", "player", "bomb", "explosion");
 }

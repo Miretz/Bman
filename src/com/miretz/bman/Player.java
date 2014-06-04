@@ -40,6 +40,7 @@ class Player extends GameObject implements Configuration {
 			if (ax==-1) break;
 			if ((BombermanGame.level.stream().anyMatch((box -> box.x==ax && y == box.y+BOX_SIZE)))) break;
 			if ((BombermanGame.bombs.stream().anyMatch((bomb -> bomb.x==ax && y == bomb.y+BOX_SIZE)))) break;
+            if ((BombermanGame.players.stream().anyMatch((player -> player.x==ax && y == player.y+BOX_SIZE)))) break;
 			this.x = ax;
 			this.y = y - SPEED;
 			break;
@@ -49,6 +50,7 @@ class Player extends GameObject implements Configuration {
 			if (bx==-1) break;
 			if ((BombermanGame.level.stream().anyMatch((box -> box.x==bx && y+BOX_SIZE == box.y)))) break;
 			if ((BombermanGame.bombs.stream().anyMatch((box -> box.x==bx && y+BOX_SIZE == box.y)))) break;
+            if ((BombermanGame.players.stream().anyMatch((player -> player.x==bx && y+BOX_SIZE == player.y)))) break;
 			this.x = bx;
 			this.y = y + SPEED;
 			break;
@@ -58,6 +60,7 @@ class Player extends GameObject implements Configuration {
 			if (ay==-1) break;
 			if ((BombermanGame.level.stream().anyMatch((box -> box.y==ay && x == box.x+BOX_SIZE)))) break;
 			if ((BombermanGame.bombs.stream().anyMatch((box -> box.y==ay && x == box.x+BOX_SIZE)))) break;
+            if ((BombermanGame.players.stream().anyMatch((players -> players.y==ay && x == players.x+BOX_SIZE)))) break;
 			this.y = ay;
 			this.x = x - SPEED;
 			break;
@@ -67,6 +70,7 @@ class Player extends GameObject implements Configuration {
 			if (by==-1) break;
 			if ((BombermanGame.level.stream().anyMatch((box -> box.y==by && x+BOX_SIZE == box.x)))) break;
 			if ((BombermanGame.bombs.stream().anyMatch((box -> box.y==by && x+BOX_SIZE == box.x)))) break;
+            if ((BombermanGame.players.stream().anyMatch((players -> players.y==by && x+BOX_SIZE == players.x)))) break;
 			this.y = by;
 			this.x = x + SPEED;
 			break;
@@ -108,16 +112,18 @@ class Player extends GameObject implements Configuration {
 
 	
 	void placeBomb(){
-		int bombX = x;
-		int bombY = y;
-		while(bombX%BOX_SIZE!=0){
-			bombX++;
-		}
-		while(bombY%BOX_SIZE!=0){
-			bombY++;
-		}
-		Bomb bomb = new Bomb(bombX, bombY);
-		BombermanGame.bombs.add(bomb);
+        if (BombermanGame.bombs.stream().filter(bomb -> bomb.getPlacedByPlayer() == this).count()<MAX_BOMBS) {
+            int bombX = x;
+            int bombY = y;
+            while (bombX % BOX_SIZE != 0) {
+                bombX++;
+            }
+            while (bombY % BOX_SIZE != 0) {
+                bombY++;
+            }
+            Bomb bomb = new Bomb(bombX, bombY, this);
+            BombermanGame.bombs.add(bomb);
+        }
 	}
 	
 

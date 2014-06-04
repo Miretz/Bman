@@ -6,17 +6,23 @@ class Bomb extends GameObject implements Configuration {
 	
 	private int timer = 3 * 60;
 	private boolean isDetonated = false;
-	
-	public Bomb(int x, int y) {
+	private final Player placedByPlayer;
+
+	public Bomb(int x, int y, Player placedByPlayer) {
 		this.x = x;
 		this.y = y;
+        this.placedByPlayer = placedByPlayer;
 	}
 	
 	public boolean isDetonated() {
 		return isDetonated;
 	}
 
-	public void draw() {
+    public Player getPlacedByPlayer() {
+        return placedByPlayer;
+    }
+
+    public void draw() {
 		timer--;
 		if(timer==0){
 			isDetonated = true;

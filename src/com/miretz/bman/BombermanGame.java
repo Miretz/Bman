@@ -56,14 +56,6 @@ public class BombermanGame implements Configuration {
 			e.printStackTrace();
 		}
 
-        //regenerate level
-        /*
-        boolean allBoxGone = level.stream().noneMatch(Box::isBreakable);
-        if(allBoxGone){
-            generateLevel();
-        }
-        */
-
 		// init opengl
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -121,7 +113,6 @@ public class BombermanGame implements Configuration {
 				player1.playerKeyPress(Keyboard.KEY_S, Keyboard.KEY_W, Keyboard.KEY_D, Keyboard.KEY_A, Keyboard.KEY_SPACE);
 				player2.playerKeyPress(Keyboard.KEY_DOWN, Keyboard.KEY_UP, Keyboard.KEY_RIGHT, Keyboard.KEY_LEFT, Keyboard.KEY_NUMPAD0);			
 				
-			
 			}
 
             Display.setTitle("Bman --- PLAYER1 LIVES: " + player1.getLives() + " --- PLAYER2 LIVES: " + player2.getLives());
