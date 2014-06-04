@@ -8,14 +8,16 @@ class Player extends GameObject implements Configuration {
 	private final String name;
     private final int start_x;
     private final int start_y;
+    private final String textureName;
 
-	Player(String name, int x, int y) {
+	Player(String name, int x, int y, String textureName) {
 		this.x = x;
 		this.y = y;
         this.start_x = x;
         this.start_y = y;
 		this.lives = 5;
 		this.name = name;
+        this.textureName = textureName;
 	}
 
 	public String getName() {
@@ -147,6 +149,6 @@ class Player extends GameObject implements Configuration {
 	}
 									
 	public void draw() {
-		super.render("player");
+		super.render(textureName);
 	}
 }

@@ -14,5 +14,5 @@ interface Configuration {
     public static final String FONT_TYPE = "Arial";
     public static final int MAX_BOMBS = 1;
 
-    public static final List<String> textureNames = Arrays.asList("wood", "stone", "player", "bomb", "explosion");
+    public static final List<String> textureNames = Arrays.asList("wood", "stone", "player1", "player2", "bomb", "explosion");
 }

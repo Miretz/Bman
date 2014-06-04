@@ -43,9 +43,9 @@ public class BombermanGame implements Configuration {
     private BombermanGame() {
 		
 		// create the player
-        Player player1 = new Player("Player 1",0, SCREEN_Y - BOX_SIZE);
+        Player player1 = new Player("Player 1",0, SCREEN_Y - BOX_SIZE,"player1");
         players.add(player1);
-        Player player2 = new Player("Player 2",SCREEN_X - BOX_SIZE, SCREEN_Y - BOX_SIZE);
+        Player player2 = new Player("Player 2",SCREEN_X - BOX_SIZE, SCREEN_Y - BOX_SIZE,"player2");
         players.add(player2);
 
 		try {
