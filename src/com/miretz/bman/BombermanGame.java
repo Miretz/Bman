@@ -55,7 +55,13 @@ public class BombermanGame implements Configuration {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
+
+        //regenerate level
+        boolean allBoxGone = level.stream().noneMatch(Box::isBreakable);
+        if(allBoxGone){
+            generateLevel();
+        }
+
 		// init opengl
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -73,6 +79,8 @@ public class BombermanGame implements Configuration {
 		for(String textureName: textureNames){
 			textures.put(textureName, loadTexture(textureName));
 		}
+
+        Display.setTitle("Bman --- PLAYER1 LIVES: " + player1.getLives() + " --- PLAYER2 LIVES: " + player2.getLives());
 				
 		generateLevel();
 
