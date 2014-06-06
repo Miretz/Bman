@@ -18,11 +18,7 @@ import java.awt.Font;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.lwjgl.input.Keyboard;
@@ -42,10 +38,10 @@ public class BombermanGame implements Configuration {
 
     private BombermanGame() {
 		
-		// create the player
+		// create the players
         Player player1 = new Player("Player 1",0, SCREEN_Y - BOX_SIZE,"player1");
-        players.add(player1);
         Player player2 = new Player("Player 2",SCREEN_X - BOX_SIZE, SCREEN_Y - BOX_SIZE,"player2");
+        players.add(player1);
         players.add(player2);
 
 		try {
@@ -86,15 +82,10 @@ public class BombermanGame implements Configuration {
 				Display.destroy();
 				System.exit(0);
 			}
-						
-			if(player1.getLives()==0){
-				font.drawString(200, 100, player2.getName() + " has won the match!", Color.yellow);
-				if (Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
-					Display.destroy();
-					System.exit(0);
-				}
-			} else if(player2.getLives()==0){
-				font.drawString(200, 100, player1.getName() + " has won the match!", Color.yellow);
+
+			if(players.stream().anyMatch(player -> player.getLives() == 0)){
+                Optional<Player> livingPlayer = players.stream().filter(player -> player.getLives()>0).findFirst();
+				font.drawString(200, 100, livingPlayer.get().getName() + " has won the match!", Color.yellow);
 				if (Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
 					Display.destroy();
 					System.exit(0);
@@ -106,8 +97,7 @@ public class BombermanGame implements Configuration {
 				
 				bombs.stream().forEach(Bomb::draw);
 				level.stream().forEach(Box::draw);
-				player1.draw();
-				player2.draw();
+				players.stream().forEach(Player::draw);
 							
 				//down, up, right, left, bomb
 				player1.playerKeyPress(Keyboard.KEY_S, Keyboard.KEY_W, Keyboard.KEY_D, Keyboard.KEY_A, Keyboard.KEY_SPACE);

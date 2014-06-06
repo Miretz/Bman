@@ -26,9 +26,13 @@ class Player extends GameObject implements Configuration {
 
 	public void die(){
 		lives--;
+        resetPosition();
+	}
+
+    public void resetPosition(){
         this.x = start_x;
         this.y = start_y;
-	}
+    }
 
 	public int getLives() {
 		return lives;

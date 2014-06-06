@@ -10,7 +10,7 @@ class GameObject implements Configuration{
 	
 	int x;
     int y;
-	
+
 	void render(String textureName){
 		BombermanGame.textures.get(textureName).bind();
 		glBegin(GL_QUADS);

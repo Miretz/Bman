@@ -71,6 +71,7 @@ class Bomb extends GameObject implements Configuration {
 		}
         if(died){
             pl.die();
+            BombermanGame.players.forEach(Player::resetPosition);
             for(Bomb b : BombermanGame.bombs){
                 b.isDetonated = true;
             }
