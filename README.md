@@ -13,7 +13,13 @@ This is the complete Intellij Idea project.
 <b>Control Player 1</b><br/>
 W A S D - movement<br/>
 SPACE - place bomb
-
+<br/>
+<br/>
+<br/>
 <b>Control Player 2</b><br/>
 Arrow Keys - movement<br/>
 NUMPAD 0 - place bomb
+<br/>
+<br/>
+<br/>
+<img src="bman_screenshot.png" />
