@@ -24,7 +24,21 @@ class GameObject implements Configuration{
 		glVertex2i(x, y + BOX_SIZE);
 		glEnd();
 	}
-	
+
+	void renderPlayer(String textureName, float xOffset){
+		BombermanGame.textures.get(textureName).bind();
+		glBegin(GL_QUADS);
+		glTexCoord2f(xOffset + 0, 0);
+		glVertex2i(x, y);
+		glTexCoord2f(xOffset + 0.25f, 0);
+		glVertex2i(x + BOX_SIZE, y);
+		glTexCoord2f(xOffset + 0.25f, 1);
+		glVertex2i(x + BOX_SIZE, y + BOX_SIZE);
+		glTexCoord2f(xOffset + 0, 1);
+		glVertex2i(x, y + BOX_SIZE);
+		glEnd();
+	}
+
 	void renderExplosion(){
 		//center
 		renderCustom(x, y);

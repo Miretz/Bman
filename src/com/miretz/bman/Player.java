@@ -11,6 +11,8 @@ class Player extends GameObject implements Configuration {
     private final String textureName;
     public boolean living;
 
+    private float xOffset = 0.0f;
+
     Player(String name, int x, int y, String textureName) {
         this.x = x;
         this.y = y;
@@ -158,15 +160,19 @@ class Player extends GameObject implements Configuration {
     public void playerKeyPress(int down, int up, int right, int left, int bomb) {
         if (Keyboard.isKeyDown(down)) {
             update(Direction.DOWN);
+            xOffset = 0.0f;
         }
         if (Keyboard.isKeyDown(up)) {
             update(Direction.UP);
+            xOffset = 0.25f;
         }
         if (Keyboard.isKeyDown(right)) {
             update(Direction.RIGHT);
+            xOffset = 0.50f;
         }
         if (Keyboard.isKeyDown(left)) {
             update(Direction.LEFT);
+            xOffset = 0.75f;
         }
         if (Keyboard.isKeyDown(bomb)) {
             placeBomb();
@@ -175,7 +181,7 @@ class Player extends GameObject implements Configuration {
 
     public void draw() {
         if (living) {
-            super.render(textureName);
+            super.renderPlayer(textureName, xOffset);
         } else {
             super.render("kill");
         }
