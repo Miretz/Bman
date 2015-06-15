@@ -98,7 +98,13 @@ public class BombermanGame implements Configuration {
                 //remove detonated bombs
                 bombs.removeIf(Bomb::isDetonated);
 
-                bombs.stream().forEach(Bomb::draw);
+                // iterate bombs in reverse
+                // this way the explosion will be over unexploded bombs
+                ListIterator<Bomb> li = bombs.listIterator(bombs.size());
+                while(li.hasPrevious()) {
+                    li.previous().draw();
+                }
+
                 level.stream().forEach(Box::draw);
                 players.stream().forEach(Player::draw);
 
