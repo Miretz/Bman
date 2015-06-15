@@ -5,14 +5,14 @@ import java.util.List;
 
 interface Configuration {
 
-    public static final int SCREEN_X = 680;
-    public static final int SCREEN_Y = 520;
-    public static final int BOX_SIZE = 40;
-    public static final int PROBABLE_BOX = 35;
-    public static final int SPEED = 4;
-    public static final int MOVEMENT_SMOOTHING = 20;
-    public static final String FONT_TYPE = "Arial";
-    public static final int MAX_BOMBS = 1;
+    int SCREEN_X = 680;
+    int SCREEN_Y = 520;
+    int BOX_SIZE = 40;
+    int PROBABLE_BOX = 35;
+    int SPEED = 4;
+    int MOVEMENT_SMOOTHING = 20;
+    String FONT_TYPE = "Arial";
+    int MAX_BOMBS = 5;
 
-    public static final List<String> textureNames = Arrays.asList("wood", "stone", "player1", "player2", "bomb", "explosion");
+    List<String> textureNames = Arrays.asList("wood", "stone", "player1", "player2", "bomb", "explosion", "kill");
 }
