@@ -2,7 +2,7 @@ package com.miretz.bman;
 
 import org.lwjgl.input.Keyboard;
 
-class Player extends GameObject implements Configuration {
+public class Player extends GameObject implements Configuration {
 
     private int lives;
     private final String name;
@@ -13,7 +13,7 @@ class Player extends GameObject implements Configuration {
 
     private float xOffset = 0.0f;
 
-    Player(String name, int x, int y, String textureName) {
+    public Player(String name, int x, int y, String textureName) {
         this.x = x;
         this.y = y;
         this.start_x = x;
@@ -43,7 +43,7 @@ class Player extends GameObject implements Configuration {
         return lives;
     }
 
-    void update(Direction direction) {
+    public void update(Direction direction) {
         switch (direction) {
             case UP:
                 if ((y - SPEED) < 0) break;
@@ -93,7 +93,7 @@ class Player extends GameObject implements Configuration {
     }
 
     //movement smooth
-    int searchLeftRight() {
+    public int searchLeftRight() {
         if (x % BOX_SIZE != 0) {
             for (int a = 0; a < MOVEMENT_SMOOTHING; a++) {
                 if ((x + a) % BOX_SIZE == 0) {
@@ -109,7 +109,7 @@ class Player extends GameObject implements Configuration {
     }
 
     //movement smooth
-    int searchUpDown() {
+    public int searchUpDown() {
         if (y % BOX_SIZE != 0) {
             for (int a = 0; a < MOVEMENT_SMOOTHING; a++) {
                 if ((y + a) % BOX_SIZE == 0) {
@@ -126,7 +126,7 @@ class Player extends GameObject implements Configuration {
     }
 
 
-    void placeBomb() {
+    public void placeBomb() {
 
         //limit max bombs
         if (BombermanGame.bombs.stream().filter(bomb -> bomb.getPlacedByPlayer() == this).count() >= MAX_BOMBS) {
@@ -147,7 +147,7 @@ class Player extends GameObject implements Configuration {
         final int newBombPosY = bombY;
 
         //do not overlap bombs
-        if(BombermanGame.bombs.stream().anyMatch(b -> b.x == newBombPosX && b.y == newBombPosY)){
+        if (BombermanGame.bombs.stream().anyMatch(b -> b.x == newBombPosX && b.y == newBombPosY)) {
             return;
         }
 

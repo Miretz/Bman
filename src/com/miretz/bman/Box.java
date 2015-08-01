@@ -1,10 +1,10 @@
 package com.miretz.bman;
 
-class Box extends GameObject {
+public class Box extends GameObject {
 	
 	private boolean isBreakable = true;
 
-	Box(int x, int y, boolean isBreakable) {
+	public Box(int x, int y, boolean isBreakable) {
 		this.x = x;
 		this.y = y;
 		this.isBreakable = isBreakable;

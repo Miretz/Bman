@@ -32,7 +32,7 @@ public class BombermanGame implements Configuration {
 
     public static final Map<String, Texture> textures = new HashMap<>();
     public static final List<Box> level = new ArrayList<>();
-    public static List<Bomb> bombs = new ArrayList<>();
+    public static final List<Bomb> bombs = new ArrayList<>();
     public static final List<Player> players = new ArrayList<>();
 
     private BombermanGame() {

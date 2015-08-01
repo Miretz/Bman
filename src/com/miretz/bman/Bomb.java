@@ -2,7 +2,7 @@ package com.miretz.bman;
 
 import java.util.Iterator;
 
-class Bomb extends GameObject implements Configuration {
+public class Bomb extends GameObject implements Configuration {
 
     //bomb timer 3 seconds
     private int timer = 3 * 60;
@@ -81,6 +81,4 @@ class Bomb extends GameObject implements Configuration {
             pl.die();
         }
     }
-
-
 }

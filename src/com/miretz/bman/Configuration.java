@@ -3,7 +3,7 @@ package com.miretz.bman;
 import java.util.Arrays;
 import java.util.List;
 
-interface Configuration {
+public interface Configuration {
 
     int SCREEN_X = 680;
     int SCREEN_Y = 520;
