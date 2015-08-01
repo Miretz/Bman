@@ -109,8 +109,8 @@ public class BombermanGame implements Configuration {
                 players.stream().forEach(Player::draw);
 
                 //down, up, right, left, bomb
-                player1.playerKeyPress(Keyboard.KEY_S, Keyboard.KEY_W, Keyboard.KEY_D, Keyboard.KEY_A, Keyboard.KEY_SPACE);
-                player2.playerKeyPress(Keyboard.KEY_DOWN, Keyboard.KEY_UP, Keyboard.KEY_RIGHT, Keyboard.KEY_LEFT, Keyboard.KEY_NUMPAD0);
+                player1.playerKeyPress(Keyboard.KEY_S, Keyboard.KEY_W, Keyboard.KEY_D, Keyboard.KEY_A, Keyboard.KEY_LSHIFT);
+                player2.playerKeyPress(Keyboard.KEY_DOWN, Keyboard.KEY_UP, Keyboard.KEY_RIGHT, Keyboard.KEY_LEFT, Keyboard.KEY_RSHIFT);
 
             }
 
