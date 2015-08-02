@@ -52,26 +52,21 @@ public class Bomb extends GameObject implements Configuration {
         //destroy boxes
         while (i.hasNext()) {
             Box box = i.next();
-            if (x == box.x) {
-                if (y == box.y + BOX_SIZE || y == box.y - BOX_SIZE) {
-                    if (box.isBreakable()) {
-                        i.remove();
-                    }
-                }
+            if (!box.isBreakable()) continue;
+
+            if ((x == box.x) && (y == box.y + BOX_SIZE || y == box.y - BOX_SIZE)) {
+                i.remove();
             }
-            if (y == box.y) {
-                if (x == box.x + BOX_SIZE || x == box.x - BOX_SIZE) {
-                    if (box.isBreakable()) {
-                        i.remove();
-                    }
-                }
+
+            if ((y == box.y) && (x == box.x + BOX_SIZE || x == box.x - BOX_SIZE)) {
+                i.remove();
             }
         }
     }
 
     private void destroyPlayer(Player pl) {
         //destroy players
-        if(!pl.living) return;
+        if (!pl.living) return;
 
         if (x > pl.x - BOX_SIZE * 2 + 5 && x < pl.x + BOX_SIZE * 2 - 5 && pl.y == y) {
             pl.die();

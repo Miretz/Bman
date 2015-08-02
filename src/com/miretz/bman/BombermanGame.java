@@ -115,7 +115,11 @@ public class BombermanGame implements Configuration {
 
     private void endGame() {
         Optional<Player> livingPlayer = players.stream().filter(player -> player.getLives() > 0).findFirst();
-        font.drawString(200, 100, livingPlayer.get().getName() + " has won the match!", Color.yellow);
+        if(livingPlayer.isPresent()){
+            font.drawString(200, 100, livingPlayer.get().getName() + " has won the match!", Color.yellow);
+        } else {
+            font.drawString(200, 100, "It's a draw!", Color.yellow);
+        }
         checkKeyExit(Keyboard.KEY_RETURN);
     }
 
@@ -142,9 +146,10 @@ public class BombermanGame implements Configuration {
 
     }
 
-    private void generateLevel() {
+    public void generateLevel() {
 
         //13 x 17
+        level.clear();
 
         // generate stones
         for (int by = BOX_SIZE; by < SCREEN_Y; by += 2 * BOX_SIZE) {
