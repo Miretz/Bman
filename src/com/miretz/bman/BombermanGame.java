@@ -37,9 +37,13 @@ public class BombermanGame implements Configuration {
     public static final List<Bomb> bombs = new ArrayList<>();
     public static final List<Player> players = new ArrayList<>();
 
+    private TrueTypeFont font;
+
     private BombermanGame() {
 
         initializeDisplay();
+
+        generateLevel();
 
         // create the players
         Player player1 = new Player("Player 1", 0, SCREEN_Y - BOX_SIZE, "player1");
@@ -47,11 +51,9 @@ public class BombermanGame implements Configuration {
         players.add(player1);
         players.add(player2);
 
-        generateLevel();
-
         //load font
         Font awtFont = new Font(FONT_TYPE, Font.BOLD, 24);
-        TrueTypeFont font = new TrueTypeFont(awtFont, false);
+        font = new TrueTypeFont(awtFont, false);
 
         // load textures
         for (String textureName : textureNames) {
@@ -65,19 +67,11 @@ public class BombermanGame implements Configuration {
             // render
             glClear(GL_COLOR_BUFFER_BIT);
 
-            // esc exit game
-            if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
-                Display.destroy();
-                System.exit(0);
-            }
+            // exit when Escape is pressed
+            checkKeyExit(Keyboard.KEY_ESCAPE);
 
             if (players.stream().anyMatch(player -> player.getLives() == 0)) {
-                Optional<Player> livingPlayer = players.stream().filter(player -> player.getLives() > 0).findFirst();
-                font.drawString(200, 100, livingPlayer.get().getName() + " has won the match!", Color.yellow);
-                if (Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
-                    Display.destroy();
-                    System.exit(0);
-                }
+                endGame();
             } else {
 
                 //remove detonated bombs
@@ -90,6 +84,7 @@ public class BombermanGame implements Configuration {
                     li.previous().draw();
                 }
 
+                //draw level and players
                 level.stream().forEach(Box::draw);
                 players.stream().forEach(Player::draw);
 
@@ -109,6 +104,19 @@ public class BombermanGame implements Configuration {
         }
 
         Display.destroy();
+    }
+
+    private void checkKeyExit(int keyEscape) {
+        if (Keyboard.isKeyDown(keyEscape)) {
+            Display.destroy();
+            System.exit(0);
+        }
+    }
+
+    private void endGame() {
+        Optional<Player> livingPlayer = players.stream().filter(player -> player.getLives() > 0).findFirst();
+        font.drawString(200, 100, livingPlayer.get().getName() + " has won the match!", Color.yellow);
+        checkKeyExit(Keyboard.KEY_RETURN);
     }
 
     private void initializeDisplay() {
