@@ -14,12 +14,14 @@ import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.glOrtho;
 import static org.lwjgl.opengl.GL11.glClearColor;
+import static org.lwjgl.opengl.GL11.glColor3f;
 
 import java.awt.Font;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -37,28 +39,15 @@ public class BombermanGame implements Configuration {
 
     private BombermanGame() {
 
+        initializeDisplay();
+
         // create the players
         Player player1 = new Player("Player 1", 0, SCREEN_Y - BOX_SIZE, "player1");
         Player player2 = new Player("Player 2", SCREEN_X - BOX_SIZE, SCREEN_Y - BOX_SIZE, "player2");
         players.add(player1);
         players.add(player2);
 
-        try {
-            Display.setDisplayMode(new DisplayMode(SCREEN_X, SCREEN_Y));
-            Display.setTitle("Bman --- PLAYER1 LIVES: " + player1.getLives() + " --- PLAYER2 LIVES: " + player2.getLives());
-            Display.create();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // init opengl
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(0, SCREEN_X, SCREEN_Y, 0, 1, -1);
-        glMatrixMode(GL_MODELVIEW);
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        generateLevel();
 
         //load font
         Font awtFont = new Font(FONT_TYPE, Font.BOLD, 24);
@@ -69,16 +58,12 @@ public class BombermanGame implements Configuration {
             textures.put(textureName, loadTexture(textureName));
         }
 
-        generateLevel();
-
-        //background color
-        glClearColor(0.12f, 0.12f, 0.12f, 1);
+        Display.setTitle("Bman");
 
         while (!Display.isCloseRequested()) {
 
             // render
             glClear(GL_COLOR_BUFFER_BIT);
-
 
             // esc exit game
             if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
@@ -101,7 +86,7 @@ public class BombermanGame implements Configuration {
                 // iterate bombs in reverse
                 // this way the explosion will be over unexploded bombs
                 ListIterator<Bomb> li = bombs.listIterator(bombs.size());
-                while(li.hasPrevious()) {
+                while (li.hasPrevious()) {
                     li.previous().draw();
                 }
 
@@ -114,12 +99,39 @@ public class BombermanGame implements Configuration {
 
             }
 
-            Display.setTitle("Bman --- PLAYER1 LIVES: " + player1.getLives() + " --- PLAYER2 LIVES: " + player2.getLives());
+            //draw score in the game
+            font.drawString(10, 0, "" + player1.getLives(), Color.yellow);
+            font.drawString(SCREEN_X - 30, 0, "" + player2.getLives(), Color.yellow);
+            glColor3f(1.0f, 1.0f, 1.0f);
+
             Display.update();
             Display.sync(60);
         }
 
         Display.destroy();
+    }
+
+    private void initializeDisplay() {
+        try {
+            Display.setDisplayMode(new DisplayMode(SCREEN_X, SCREEN_Y));
+            Display.setTitle("Loading...");
+            Display.create();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // init opengl
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0, SCREEN_X, SCREEN_Y, 0, 1, -1);
+        glMatrixMode(GL_MODELVIEW);
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        //background color
+        glClearColor(0.12f, 0.12f, 0.12f, 1);
+
     }
 
     private void generateLevel() {
